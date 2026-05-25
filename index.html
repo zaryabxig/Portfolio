@@ -1452,6 +1452,51 @@ document.querySelectorAll(".mobile-menu a").forEach(link => {
     mobileMenu.classList.remove("active");
   });
 });
+const contactForm = document.getElementById("contactForm");
+
+contactForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const subject = document.getElementById("subject").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  if (!name || !email || !subject || !message) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+  if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  const body =
+`Name: ${name}
+
+Email: ${email}
+
+Message:
+${message}`;
+
+  window.location.href =
+`mailto:zaryabxig@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  const btn = document.getElementById("submitBtn");
+
+  btn.textContent = "✓ Ready To Send!";
+  btn.style.background = "#00bb55";
+
+  setTimeout(() => {
+    btn.textContent = "Send Message ⚡";
+    btn.style.background = "";
+  }, 3000);
+
+  contactForm.reset();
+});
 </script>
 </body>
 </html>
